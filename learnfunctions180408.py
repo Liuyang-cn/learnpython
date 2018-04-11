@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 #-*- coding:utf-8 -*-
 print('%2d-%02d' % (3,1))
 s1 = 72
