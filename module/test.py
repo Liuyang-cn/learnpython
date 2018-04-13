@@ -37,7 +37,6 @@ print(sys.ps1)
 '''
 #导入包与模块
 #导入..echo模块，每次输入都要..echo
-#注意最后一项可以是模块或包 而不能是类、函数、变量
 import soound.effects.echo #注意最后一块
 sound.effects.echo.function() #调用
 #用from...import的模式就不需要输入前缀
@@ -46,10 +45,4 @@ echo.function() #调用
 #直接导入函数
 form sound.effects.echo import function
 funciton() #调用
-
-#from sound.effects import *
-#知识导入包定义文件__all__类似的列表变量
-#包定义文件
-__init__.py
-
 '''
