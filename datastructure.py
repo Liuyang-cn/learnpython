@@ -57,7 +57,6 @@ print([[row[i] for row in matrix] for i in range(4)])
 #以下两句解释了上一句的内在过程 内循环->外循环
 print([[[i, j] for i in range(4)] for j in range(4)])
 print([row for row in matrix])
-'''
 #另一种转换方法
 transposed = []
 for i in range(4):  #列循环
@@ -67,3 +66,15 @@ for i in range(4):  #列循环
         transposed_row.append(row[i])  #每次添加一个元素
     transposed.append(transposed_row)  #每次添加一个元组
 print(transposed)
+'''
+#del 语句
+a = [-1, 1, 66.25, 333, 333, 1234.5]
+del a[0]
+print(a)
+del a[2:4]  #2到4
+print(a)
+del a[:]  #全部
+print(a)
+#可用 del 删除时题变量
+del a
+# print(a) #NameError: name 'a' is not defined
