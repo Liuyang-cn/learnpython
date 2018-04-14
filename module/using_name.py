@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 #Filename: using_name.py
 
 #前缀后缀都是双下划线
