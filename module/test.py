@@ -1,4 +1,4 @@
-#!usr/bin/python3
+#!usr/bin/env python3
 #
 #导入模块 import
 import support
