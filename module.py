@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 #文件名：using_sys.py
 
 import sys  #引入sys.py模块

@@ -11,3 +11,4 @@
 4. module.py        模块练习
 5. \module\support.py      模块练习
 6. \module\test.py         模块练习
+7. InAndOut.py              输入输出练习
