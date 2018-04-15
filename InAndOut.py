@@ -33,12 +33,28 @@ for x in range(1, 11):
 #.zfill()左边填零
 print('-3.14'.zfill(7))
 for x in range(1, 11):
-    print('{0:2d}{1:3d}{2:4d}'.format(x, x * x, x * x * x))
-'''
+    print('{0:2d}{1:3d}{2:4d}'.format(x, x * x, x * x * x))   #{:2d}两个宽度的10进制数
+
 #str.format() 格式化输出
 print('{}网址: "{}!"'.format('菜鸟教程', 'www.runoob,com'))
 #大括号及其内的字符会被.format()后的字符替换掉
 #与大括号内的定义相符
 print('{0}和{1}'.format('Google', 'Runoog'))
 print('{1}和{0}'.format('Google', 'Runoog'))
-#
+#format()中关键字参数的使用
+print('{name}网址： {site}'.format(name='菜鸟教程', site='www.runoob.com'))
+#位置及关键字参数可以任意组合
+print('站点列表{0},{1},和{other}。'.format('Google', 'Runoob', other='Taobao'))
+
+#!a 使用ascii()
+#!s 使用str()
+#!r 使用repr()
+import math
+print('常量PI的值近似为： {!a}。'.format(math.pi))
+print('常量PI的值近似为：{!r}。'.format(math.pi))
+
+'''
+
+### 读取键盘输入
+str = input("请输入：")
+print("你输入的内容是：")
