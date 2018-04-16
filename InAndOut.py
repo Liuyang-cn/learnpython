@@ -53,8 +53,11 @@ import math
 print('常量PI的值近似为： {!a}。'.format(math.pi))
 print('常量PI的值近似为：{!r}。'.format(math.pi))
 
-'''
-
 ### 读取键盘输入
+#
+import sys
 str = input("请输入：")
-print("你输入的内容是：")
+print("你输入的内容是：", str) #?RuntimeError: input(): lost sys.stdin
+#when I input these in powershell ,it is ok
+
+'''
