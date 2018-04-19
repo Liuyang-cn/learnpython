@@ -13,3 +13,4 @@
 6. \module\test.py         模块练习
 7. InAndOut.py              输入输出练习
   ![OpeningFiles.png](/appendix/OpeningFiles.png)
+8. Errors&Mistakes.py      错误和异常处理
