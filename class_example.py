@@ -118,7 +118,7 @@ class sample(speaker, student):
 
 test = sample("Tim", 25, 80, 4, "Python")
 test.speak()  #方法名同，默认调用的是在括号中排前的父类的方法
-'''
+
 
 
 ######################
@@ -137,3 +137,68 @@ c = Child()
 c.myMethod()
 ###super()函数是用于调用父类(超类)的一个方法
 super(Child, c).myMethod()
+
+
+
+###################
+###类的私有方法
+###__private_method
+###类得私有属性实例
+class JustCounter:
+    __secretCount = 0  #私有变量
+    publicCount = 0  #公开变量
+
+    def count(self):
+        self.__secretCount += 1
+        self.publicCount += 1
+        print(self.__secretCount)
+
+
+counter = JustCounter()
+counter.count()
+counter.count()
+print(counter.publicCount)
+print(counter.__secretCount)  #报错，实例不能访问私有变量
+
+
+class Site:
+    def __init__(self, name, url):
+        self.name = name  #public
+        self.__url = url  #private
+
+    def who(self):
+        print('name:', self.name)
+        print('url:', self.__url)
+
+    def __foo(self):
+        print('这是私有方法')
+
+    def foo(self):
+        print('这是公共方法')
+        self.__foo()
+
+
+x = Site('菜鸟教程', 'www.runoob.com')
+x.who()
+x.foo()
+### x.__foo()   # 报错无法访问私有变量
+
+'''
+
+
+#### 运算符重载##############
+class Vector:
+    def __init__(self, a, b):
+        self.a = b
+        self.b = b
+
+    def __str__(self):
+        return 'Vector (%d, %d)' % (self.a, self.b)
+
+    def __add__(self, other):
+        return Vector(self.a + other.a, self.b + other.b)
+
+
+v1 = Vector(2, 10)
+v2 = Vector(5, -2)
+print(v1 + v2)
