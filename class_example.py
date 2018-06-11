@@ -58,7 +58,6 @@ class student(people):
 
 s = student('ken', 10, 60, 3)
 s.speak()
-'''
 
 
 #############
@@ -119,3 +118,22 @@ class sample(speaker, student):
 
 test = sample("Tim", 25, 80, 4, "Python")
 test.speak()  #方法名同，默认调用的是在括号中排前的父类的方法
+'''
+
+
+######################
+###方法重写#####
+class Parent:
+    def myMethod(self):
+        print('调用父类方法')
+
+
+class Child(Parent):
+    def myMethod(self):
+        print('调用子类方法')
+
+
+c = Child()
+c.myMethod()
+###super()函数是用于调用父类(超类)的一个方法
+super(Child, c).myMethod()
