@@ -1,7 +1,7 @@
 #/user/bin/dev python3
 
 import os
-p
+
 print('Process (%s) start...' % os.getpid())
 #Only works on Unix/Linux/Mac:
 pid = os.fork()
