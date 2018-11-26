@@ -4,5 +4,6 @@
 __author__ = 'Lewis Liu'
 
 import aiomysql
-import aiohttp
+# import aiohttp
 import asyncio,logging
+
