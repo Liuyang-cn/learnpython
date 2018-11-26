@@ -94,6 +94,7 @@ pickle.dump(data1, output)
 pickle.dump(selfref_list, output, -1)
 output.close()
 '''
+'''
 import pprint, pickle
 #使用pickle模块从文件中重构python对象
 pkl_file = open('tmp/data.pkl', 'rb')
@@ -101,3 +102,6 @@ pkl_file = open('tmp/data.pkl', 'rb')
 data2 = pickle.load(pkl_file)
 pprint.pprint(data2)
 pkl_file.close()
+ '''
+ import os
+ os.name

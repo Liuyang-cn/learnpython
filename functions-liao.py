@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#-*- coding:utf-8 -*-
+# -*- coding: utf-8 -*-
 # 廖雪峰
 print('%2d-%02d' % (3, 1))
 s1 = 72
