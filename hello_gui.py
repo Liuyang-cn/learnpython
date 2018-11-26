@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 #!-*- coding:utf-8 -*-
 
-from tkinter import *
+import tkinter
 class Application(Frame):
     def __init__(self,master=None):
         Frame.__init__(self,master)
