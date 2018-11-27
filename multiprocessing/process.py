@@ -1,4 +1,4 @@
-#/user/bin/dev python3
+/user/bin/dev python3
 
 import os
 
