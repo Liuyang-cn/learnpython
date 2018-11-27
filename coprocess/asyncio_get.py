@@ -10,7 +10,8 @@ def wget(host):
     reader,writer=yield from connect
     header='GET /HTTP/1.0\r\nHost:%s\r\n\r\n'% host
     writer.write(header.encode('utf-8')
-    yield from writer.drain()
+    await writer.drain()
+    #yield from writer.drain()
     while True:
         line = yield from reader.readline()
         if line == b'\r\n':
