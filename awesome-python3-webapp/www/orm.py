@@ -3,29 +3,37 @@
 
 __author__ = 'Lewis Liu'
 
-@async.coroutine
-def creat_pool:
-   logging.info('create database connection pool...') 
-   global __pool
-   __pool = yield form aiomysql.creat_pools
-       host=kw.get('host', 'localhost'),
-       port=kw.get('port', 'localhost'),
-       user=kw['user'],
-       password=kw['password'],s
-       db=kw['db']pip
-   )
+import aiomysql
+import asyncio, logging
 
-@asyncio.coroutine
-def select(sql, args, size=none):
-    lof(sql, args)
+
+def log(sql, arg=()):
+    logging.info('SQL:%s' % sql)
+
+
+#@async.coroutine
+async def create_pool(loop, **kw):
+    logging.info('create database connection pool...')
     global __pool
-    with(yield from __pool) as conn:
-        cur = yield from conn.cursor(aiomysql.DictCursor)
-        yield from cur.execute(sql.replace('?', '%s'), args or())
+    __pool = await aiomysql.create_pool
+        host=kw.get('host', 'localhost'),
+        port=kw.get('port', 'localhost'),
+        user=kw['user'],
+        password=kw['password'],
+        db=kw['db'])
+
+
+#@asyncio.coroutine
+async def select(sql, args, size=None):
+    log(sql, args)
+    global __pool
+    with (await __pool) as conn:
+        cur = await conn.cursor(aiomysql.DictCursor)
+        await cur.execute(sql.replace('?', '%s'), args or ())
         if size:
-            rs = yield from cur.fetchmany(size)
+            rs = await cur.fetchmany(size)
         else:
-            rs = yield form cur.fetchall()
-        yield from cur.close()
-    loggint.info('rows returned:%s' % len(rs))
-    return rs
+            rs = await cur.fetchall()
+        await cur.close()
+        logging.info('rows returned:%s' % len(rs))
+        return rs
