@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
 r'''
 learning.py
 
@@ -18,18 +17,22 @@ from datetime import datetime
 
 CERT_EXPIRES = '2019-07-07'
 
+
 def check_version():
     v = sys.version_info
     if v.major == 3 and v.minor >= 5:
         return
-    print('Your current python is %d.%d. Please use Python 3.6.' % (v.major, v.minor))
+    print('Your current python is %d.%d. Please use Python 3.6.' % (v.major,
+                                                                    v.minor))
     exit(1)
+
 
 def check_cert():
     today = datetime.now().strftime('%Y-%m-%d')
     if today >= CERT_EXPIRES:
         print('This learning.py is expired. Please download a newer version.')
         exit(1)
+
 
 check_version()
 check_cert()
@@ -56,8 +59,8 @@ HTML_INDEX = r'''
 </html>
 '''
 
-class LearningHTTPRequestHandler(BaseHTTPRequestHandler):
 
+class LearningHTTPRequestHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         self.close_connection = True
         if self.path != '/':
@@ -79,7 +82,10 @@ class LearningHTTPRequestHandler(BaseHTTPRequestHandler):
         try:
             fpath = write_py(get_name(), code)
             print('Execute: %s %s' % (EXEC, fpath))
-            r['output'] = decode(subprocess.check_output([EXEC, fpath], stderr=subprocess.STDOUT, timeout=5))
+            r['output'] = decode(
+                subprocess.check_output([EXEC, fpath],
+                                        stderr=subprocess.STDOUT,
+                                        timeout=5))
         except subprocess.CalledProcessError as e:
             r = dict(error='Exception', output=decode(e.output))
         except subprocess.TimeoutExpired as e:
@@ -109,22 +115,27 @@ class LearningHTTPRequestHandler(BaseHTTPRequestHandler):
             body = json.dumps(data).encode('utf-8', errors='ignore')
         self.wfile.write(body)
 
+
 def main():
     certfile = write_cert()
     httpd = HTTPServer(('127.0.0.1', PORT), LearningHTTPRequestHandler)
-    httpd.socket = ssl.wrap_socket(httpd.socket, certfile=certfile, server_side=True)
+    httpd.socket = ssl.wrap_socket(
+        httpd.socket, certfile=certfile, server_side=True)
     print('Ready for Python code on port %d...' % PORT)
     print('Press Ctrl + C to exit...')
     httpd.serve_forever()
+
 
 # functions ###################################################################
 
 INDEX = 0
 
+
 def get_name():
     global INDEX
     INDEX = INDEX + 1
     return 'test_%d' % INDEX
+
 
 def write_py(name, code):
     fpath = os.path.join(TEMP, '%s.py' % name)
@@ -133,19 +144,23 @@ def write_py(name, code):
     print('Code wrote to: %s' % fpath)
     return fpath
 
+
 def decode(s):
     try:
         return s.decode('utf-8')
     except UnicodeDecodeError:
         return s.decode('gbk')
 
+
 # certificate #################################################################
+
 
 def write_cert():
     fpath = os.path.join(TEMP, 'local.liaoxuefeng.com.pem')
     with open(fpath, 'w', encoding='utf-8') as f:
         f.write(CERT_DATA)
     return fpath
+
 
 CERT_DATA = r'''
 -----BEGIN RSA PRIVATE KEY-----
