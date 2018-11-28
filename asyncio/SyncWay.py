@@ -2,6 +2,7 @@
 #!-*-coding:utf-8-*-
 
 import socket
+import time
 
 def blocking_way():
     sock = socket.socket()
@@ -23,5 +24,8 @@ def sync_way():
         res.append(blocking_way())
     return len(res)
 
-time=sync_way()
-print('%f'% time)
+start = time.clock()
+print(start)
+sync_way()
+end = time.clock()
+print(end - start)
