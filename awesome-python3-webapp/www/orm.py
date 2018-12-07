@@ -22,7 +22,7 @@ async def create_pool(loop, **kw):
         password=kw['password'],
         db=kw['db'])
 
-
+#select
 #@asyncio.coroutine
 async def select(sql, args, size=None):
     log(sql, args)
@@ -37,3 +37,19 @@ async def select(sql, args, size=None):
         await cur.close()
         logging.info('rows returned:%s' % len(rs))
         return rs
+
+# insert,update,delete 语句定义一个通用的execute()
+async def execute(sql,args):
+    log(sql)
+    with (await __pool) as conn:
+        try:
+            cur = await conn.cursor()
+            await cur.execute(sql.replace('?','%s'))
+            affected=cur.rowcount
+            await from cur.close()
+        exicept BaseException as e:
+            raise
+        return affected
+
+
+
