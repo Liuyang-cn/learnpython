@@ -3,11 +3,12 @@
 
 import socket
 
+
 def nonblocking_way():
     sock = socket.socket()
     socket.setblocking(False)
     try:
-        sock.connect(('baidu.com',80))
+        sock.connect(('baidu.com', 80))
     except BlockingIOError:
         # 非阻塞过程中可能抛出异常
         pass
@@ -21,7 +22,7 @@ def nonblocking_way():
             break
         except OSError:
             pass
-    
+
     response = b''
     while True:
         try:
@@ -33,8 +34,18 @@ def nonblocking_way():
         except OSError:
             pass
     return response
+
+
 def sync_way():
     res = []
     for i in range(10):
         res.append(nonblocking_way())
     return len(res)
+
+
+def main():
+    from time import time
+    start = time()
+    sync_way()
+    end = time()
+    print('Cost {} seconds'.format((end - start) / 5))

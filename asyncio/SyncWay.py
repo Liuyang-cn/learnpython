@@ -27,8 +27,9 @@ def sync_way():
     return len(res)
 
 
-start = time.clock()
-print(start)
-sync_way()
-end = time.clock()
-print(end - start)
+def main():
+    start = time.clock()
+    print(start)
+    sync_way()
+    end = time.clock()
+    print(end - start)
