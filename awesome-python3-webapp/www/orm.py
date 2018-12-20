@@ -55,7 +55,7 @@ async def execute(sql, args, autocommit=True):
                 affected = cur.rowcount
             if not autocommit:
                 await conn.commit()
-        except BaseException as e:S
+        except BaseException as e:
             if not autocommit:
                 await conn.rollback()
             raise
@@ -65,7 +65,7 @@ def creat_args_string(num):
     L=[]
     for n in range (num):
         L.append('?')
-    return ', '.join()
+    return ', '.join(L)
 
 class Field(object):
 
@@ -95,17 +95,17 @@ class IntegerField(Field):
 class FloatField(Field):
 
     def __init__(self,name=None,primary_key=False,default=0.0):
-        super().__init__(name,'real',primary__key,default)
+        super().__init__(name,'real',primary_key,default)
     
 class TextField(Field):
 
     def __init__(self,name=None,default=None):
         super().__init__(name,'text',False,default)
 
-class ModelMetaclass(typy):
+class ModelMetaclass(type):
 
     def __new__(cls,name,bases,attrs):
-        if name = 'Model':
+        if name == 'Model':
             return type.__new__(cls,name,bases,attrs)
         tableName = attrs.get('__table__',None) or name
         logging.info('found model: %s (table:%s)' % (name,tableName))
@@ -135,10 +135,10 @@ class ModelMetaclass(typy):
         attrs['__select__']='select `%s`,%s from `%s`' % (primaryKey,','.join(escaped_fields),tableName)
         attrs['__insert__']='insert into `%s`(%s,`%s`) values(%s)' % (tableName,', '.join(escaped_fields),primaryKey,creat_args_string(len(escaped_fields)+1))
         attrs['__update__']='update `%s` set %s where `%s` = ?' % (tableName,', '.join(map(lambda f: '`%s`=?'%(mappings.get(f).name or f),fields)),primaryKey)
-        attrs['__delete__']='delete from `%s`=?' % (tableName,primaryKey)
+        attrs['__delete__']='delete from `%s` where `%s`=?' % (tableName,primaryKey)
 
 
-class Model(dict,ModelMetaclass=ModelMetaclass):
+class Model(dict,metaclass=ModelMetaclass):
 
     def __init__(self,**kw):
         super(Model,self).__init__(**kw)
@@ -156,7 +156,7 @@ class Model(dict,ModelMetaclass=ModelMetaclass):
         return getattr(self,key,None)
 
     def getValueOrDefault(self,key):
-        value = get attr(self,key,None)
+        value = getattr(self,key,None)
         if value is None:
             field = self.__mappings__[key]
             if field.default is not None:
