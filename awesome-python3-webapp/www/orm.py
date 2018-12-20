@@ -60,3 +60,4 @@ async def execute(sql, args, autocommit=(size)):
                 await conn.rollback()
             raise
         return affected
+
