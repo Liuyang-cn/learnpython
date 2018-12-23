@@ -6,7 +6,7 @@ CREATE DATABASE awesome;
 
 USE awesome;
 
-GRANT SELECT,INSERT,UPDATE,DELETE ON awesome.* to 'www-data'@'localhost' IDENTIFIED BY 'www-data';
+GRANT SELECT,INSERT,UPDATE,DELETE ON awesome.* to 'www-data'@'localhost';
 
 CREATE TABLE users (
     `id` VARCHAR
