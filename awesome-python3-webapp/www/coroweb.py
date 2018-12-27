@@ -25,5 +25,10 @@ def get(path):
         wrapper.__method__ = 'GET'
         wrapper.__route__ = path
         return wrapper
-
     return decorator
+
+def post(path):
+    '''
+    Define decoratror @post('/path')
+    '''
+    
